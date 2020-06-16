@@ -131,7 +131,7 @@
 ![equation](images/efficientdet_07.png)
 - inference time에서도 기존 보다 GPU에서 4.1x CPU에서 10.8x 빨라짐
 ### EfficientDet for Semantic Segmentation
-![equation](images/efficientdet_08.png)
+![equation](images/efficientdet_09.png)
 -  semantic segmentation에서도 검증위해 실험
 - P2 feature layer를 추가하여 per-pixel classification 으로 활용
 - EfficientDet-D4 기반(ResNet-50과 비슷한 모델 사이즈)
@@ -143,7 +143,7 @@
 ---
 ## Ablation Study
 ### Disentangling Backbone and BiFPN
-![equation](images/efficientdet_09.png)
+![equation](images/efficientdet_08.png)
 - 위 표를 통해 EfficientNet와 BiFPN이 좋다!! 는 것을 증명
 ### BiFPN Cross-Scale Connections
 ![equation](images/efficientdet_10.png)
