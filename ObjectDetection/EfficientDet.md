@@ -50,7 +50,7 @@
   - 이 방식은 좋은 performance를 나타냈지만, 학습하기 어려움
 ### Model Scaling
 - accuracy를 높이기 위해 backbone을 더 키우거나 input resoluition을 키움(512x512 -> 1536x1536)
-- 이것은 모두 single 또는 제한젃인 요소만 바꿈 -> Compound scaling 제안
+- 이것은 모두 single 또는 제한적인 요소만 바꿈 -> Compound scaling 제안
 
 ---
 ## BiFPN
@@ -75,6 +75,7 @@
 
 ### Weighted Feature Fusion
 - 기존 Pyramid attention network에서는 동등한 취급으로 feature 융합 -> 이를 해결하기위하여 weight 추가
+
 ![equation](images/efficientdet_03.png)   
 
 |  | Comment |
@@ -87,7 +88,9 @@
 
 ---
 ## EfficientDet
+
 ![equation](images/efficientdet_04.png)   
+
 ### Efficient Architecture
 - one-stage detector로 구성
 - Feature network로는 제안한 BiFPN 사용
@@ -98,7 +101,9 @@
   - 위 방법들은 제한적인 관점에서의 scaling
 - EfficientNet에서 사용했던 compound scaling을 활용 (simple compound coefficient 하나만으로)
   - 하지만 object detector에는 backbone, BiFPN, class/bax Network들이 있어 grid search 방법은 너무 오래 걸림 -> heuristic 기반의 접근으로 수행
+
 ![equation](images/efficientdet_05.png)   
+
 #### Backbone Network
 - EfficientNet와 동일한 width/depth scaling coefficients 활용
 #### BiFPN Network
@@ -116,22 +121,29 @@
 - COCO 2017 dataset (118K images)
 - SGD Optimizer(momentum=0.9, weight decay=4e-5)
 - 첫 epoch에서 learning rate 0 ~ 0.16으로 linear하게 증가. 그 다음 epoch부터는 CosineAnnealingLR 사용
-- 모든 convolution 이후에는 batch norm 추가(decay=0.99, epsilon=1e-3, exponential moving average=0.9998)
+- 모든 convolution 이후에는 batch norm 추가(decay=0.99, epsilon=1e-3)
+- exponential moving average=0.9998
 - Focal loss 사용(alpha=0.25, gamma=1.5)
 - aspect ratio={1/2, 1, 2}
 - 300 epochs 수행(D7 모델은 500 epochs)
 - 128 batch size (32 TPUv3 Cores 사용)
 - preprocessing는 RetinaNet[22]와 동일하게 croping/scaling flipping 활용. Auto-augmentation 사용하지 않음
-![equation](images/efficientdet_06.png)
+
+![equation](images/efficientdet_06.png)   
+
 - 결과, 4x-9x 모델 사이즈 작아짐. 13x-42x FLOPs 작아짐
 - EfficientDet-D0는 YoloV3에 비하여 정확도는 조금 떨어지지만 28x FLOPs 작아짐
 - Mask-RCNN, RetinaNet와 비교하면 EfficientDet-D1이 비슷한 정확도에 더 작은 FLOPs
 - EfficientDet-D7은 SOTA 달성
 - 특히 고정된 anchor 및 auto-augmentation 없이 위 정확도 보임
-![equation](images/efficientdet_07.png)
+
+![equation](images/efficientdet_07.png)   
+
 - inference time에서도 기존 보다 GPU에서 4.1x CPU에서 10.8x 빨라짐
 ### EfficientDet for Semantic Segmentation
-![equation](images/efficientdet_09.png)
+
+![equation](images/efficientdet_09.png)   
+
 -  semantic segmentation에서도 검증위해 실험
 - P2 feature layer를 추가하여 per-pixel classification 으로 활용
 - EfficientDet-D4 기반(ResNet-50과 비슷한 모델 사이즈)
@@ -143,20 +155,30 @@
 ---
 ## Ablation Study
 ### Disentangling Backbone and BiFPN
-![equation](images/efficientdet_08.png)
+
+![equation](images/efficientdet_08.png)   
+
 - 위 표를 통해 EfficientNet와 BiFPN이 좋다!! 는 것을 증명
 ### BiFPN Cross-Scale Connections
-![equation](images/efficientdet_10.png)
+
+![equation](images/efficientdet_10.png)   
+
 - features 사이의 cross-scale connections 종류별 accuracy & efficiency
 - Top-down FPN은 여러번 반복해도 accuracy가 낮은 것으로 보여 bottom-up으로 connections이 없이는 accuracy를 높이는데 한계가 있는 것을 증명
 - repeated FPN + PANet는 accuracy는 높지만 여전히 FLOPs는 많음
 - BiFPN은 Accuracy는 repeated FPN + PANet와 비슷하지만 더 적은 FLOPs -> weight를 추가하면 accuracy까지 높아지는 것을 확인
 ### Softmax vs Fast Normalized Fusion
-![equation](images/efficientdet_12.png)
+
+![equation](images/efficientdet_12.png)   
+
 - 위 표를 보면 AP의 하락에 비하여 30%가량의 속도 증가 보임
-![equation](images/efficientdet_11.png)
+
+![equation](images/efficientdet_11.png)   
+
 - 위 그림을 보면 norm weight가 빠르게 변하는 것을 볼 수 있고, 이 그림으로 feature layer가 융합시 서로 다르게 weight를 주는 것을 확인할 수 있음 (main contribution인 feature layer 융합시 서로 다르게 weight를 줘야한다는 것을 증명)
 - 또한, fast-norm 방식과 softmax 방식이 비슷한 경향으로 따라가기 때문에 fast-norm의 타당성도 검증
 ### Compound Scaling
-![equation](images/efficientdet_13.png)
+
+![equation](images/efficientdet_13.png)   
+
 - 동일한 FLOPs 기준으로 한 측면에서 scaling하는 것 보다, jointly scaling이 더 나은 효율성을 보이는 것을 확인
