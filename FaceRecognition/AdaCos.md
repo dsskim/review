@@ -172,6 +172,35 @@
   - 144 x 144
   - -1 ~ 1로 normalize
 
----
+### Results on LFW
+- 6000개의 ground-truth 쌍
+- 반은 Positive(동일 인물), 반은 Negative(다른 인물)
 
-## Conclusions
+#### Comparision on LFW
+
+![equation](images/adacos_02.png)
+
+- ResNet-50, batch size=512, cleaned WebFace, 144 x 144, feature dim=512
+- 나머지 loss의 scale parameter=30, margin은 CosFace=0.25, ArcFace=0.5
+- 3번의 학습 및 테스트 결과 AdaCos가 모두 성능이 좋음
+
+#### Exploratory Experimets
+- 학습 시간에 따른 scale parameter과 feature angle의 변화
+  - scale 가 점점 감소하는 것을 확인 -> 학습이 진행될수록 stricter supervision해진다는 것을 알 수 있음
+  - θ의 변화를 보면 AdaCos가 더 작은 θ로 수렴하는 것을 볼 수 있음 -> intra-class간의 샘플들의 각도가 좁다는 것을 확인
+
+![equation](images/adacos_03.png)
+![equation](images/adacos_04.png)
+
+### Results on MegaFace
+- 1M images, 690K IDs
+- Inception-ResNet, CASIA-WebFACE + MS1M(Overlapped subjects 제거)
+
+![equation](images/adacos_05.png)
+
+### Results on IJB-C 1:1 verification protocol
+- 3500 IDs, 31,334 images, 117,542 video frames
+- 19,557 positive, 15,638,932 negative
+
+![equation](images/adacos_06.png)
+
