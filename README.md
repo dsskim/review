@@ -2,10 +2,6 @@
 
 ---
 
-## Network Architecture
-
----
-
 ## Object Detection
 - EfficientDet: Scalable and Efficient Object Detection [[Paper]](https://arxiv.org/abs/1911.09070) [[Review]](https://github.com/dsskim/review/blob/master/Papers/ObjectDetection/EfficientDet.md)
 
