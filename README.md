@@ -18,12 +18,12 @@
 ---
 
 ## DeepLearning Skill
-- AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients [[Paper]](https://arxiv.org/abs/2010.07468) [[Review]](https://github.com/dsskim/review/blob/master/Papers/Skill/AdaBelief.md)---
+- AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients [[Paper]](https://arxiv.org/abs/2010.07468) [[Review]](https://github.com/dsskim/review/blob/master/Papers/Skill/AdaBelief.md)
 
 ---
 
 ## Self-Supervised Learning
-- Self-supervised Pretraining of Visual Features in the Wild [[Paper]](https://arxiv.org/abs/2103.01988) [[Review]](https://github.com/dsskim/review/blob/master/Papers/Self-Supervised Learning/SEER.md)
+- Self-supervised Pretraining of Visual Features in the Wild [[Paper]](https://arxiv.org/abs/2103.01988) [[Review]](https://github.com/dsskim/review/blob/master/Papers/SelfSupervisedLearning/SEER.md)
 
 
 ---
