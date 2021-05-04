@@ -25,6 +25,11 @@
 ## Self-Supervised Learning
 - Self-supervised Pretraining of Visual Features in the Wild [[Paper]](https://arxiv.org/abs/2103.01988) [[Review]](https://github.com/dsskim/review/blob/master/Papers/SelfSupervisedLearning/SEER.md)
 
+---
+
+## Pose estimation
+- Self-supervised Pretraining of Visual Features in the Wild [[Paper]](https://arxiv.org/abs/1811.12004) [[Review]](https://github.com/dsskim/review/blob/master/Papers/PoseEstimation/Lightweight_OpenPose.md)
+
 
 ---
 
