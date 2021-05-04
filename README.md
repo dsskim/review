@@ -28,7 +28,7 @@
 ---
 
 ## Pose estimation
-- Self-supervised Pretraining of Visual Features in the Wild [[Paper]](https://arxiv.org/abs/1811.12004) [[Review]](https://github.com/dsskim/review/blob/master/Papers/PoseEstimation/Lightweight_OpenPose.md)
+- Real-time 2D Multi-Person Pose Estimation on CPU: Lightweight OpenPose [[Paper]](https://arxiv.org/abs/1811.12004) [[Review]](https://github.com/dsskim/review/blob/master/Papers/PoseEstimation/Lightweight_OpenPose.md)
 
 
 ---
