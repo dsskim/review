@@ -30,6 +30,7 @@
 ## Pose estimation
 - Real-time 2D Multi-Person Pose Estimation on CPU: Lightweight OpenPose [[Paper]](https://arxiv.org/abs/1811.12004) [[Review]](https://github.com/dsskim/review/blob/master/Papers/PoseEstimation/Lightweight_OpenPose.md)
 
+- Stacked Hourglass Networks for Human Pose Estimation [[Paper]](https://arxiv.org/abs/1603.06937) [[Review]](https://github.com/dsskim/review/blob/master/Papers/PoseEstimation/Stacked_Hourglass_Networks_for_Human_Pose_Estimation.md)
 
 ---
 
