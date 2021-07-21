@@ -59,7 +59,7 @@
 
 - 간단한 모델을 이용하여 불균형한 데이터와 extra 데이터가 전체 학습 진행에 미치는 영향을 확인
 - 가설
-  - 불균형한 데이터로 학습한 기본 모델로 extra 데이터의 label을 지정할 수 있다. -> 여기서 얻은 unlabeled data의 분포도 불균형할 것임
+  - 불균형한 데이터로 학습한 기본 모델로 extra 데이터의 label을 지정할 수 있다. -> 여기서 얻은 unlabeled data의 분포도 불균형할 것임 -> 이 데이터를 학습에 추가 데이터로 사용하면 성능 향상 가능
 
 ### 논문의 수식에 따르면
 
@@ -102,3 +102,51 @@
 
 ## Further thoughts on semi-supervised imbalanced learning
 
+### Unlabeled 데이터와 기존 학습 데이터와의 관련성
+- unlabeled 데이터 중에서 기존 학습 데이터의 카테고리에 속하지 않은 데이터들의 경우, 이 부정확한 정보들은 학습결과에 안좋은 영향을 미침
+  - 위 문제를 확인하기위해, unlabeled 데이터와 기존 학습 데이터의 관련성을 조절하여(unlabeled 데이터에 학습데이터의 label과 같은 영상을 얼마나 포함했는지를 변경한 것으로 보임) 테스트 -> Fig.2
+- 의료 데이터에서 실제 질병에 대한 데이터는 1% 정도밖에 되지 않으므로, unlabeled 데이터를 수집한다 하더라도 질병에 대한 데이터는 매우 적음
+  - unlabeled 데이터의 연관성은 60%로 고정하고, 불균형도를 조절하여 불균형도가 학습에 얼마나 영향을 미치는지 테스트 -> Fig.3
+
+![experiment_result_03](images/data_imbalance_05.png)
+
+- 위와 같은 문제는 일반적인 상황에서도 많이 발생할 수 있는 문제이며, 그러므로 semi-supervised 학습이 어려운 극단적인 경우에는 다른 효과적인 방법이 필요 -> Self-supervised 학습
+
+---
+
+## Imbalanced learning from self-supervision
+
+- Self-supervied 학습의 테스트 결과 아래의 결과 도출
+  - 높은 확률로 self-supervied 학습으로 좋은 모델을 획득할 수 있었음. feature domain에서 오류도 감소
+  - 학습 데이터의 불균형도는 좋은 모델을 생성하는데 영향을 미침
+
+
+### Self-supervised imbalanced learning framework
+
+1. label bias 문제를 극복하기 위해, 첫 스테이지에서 label 정보를 제외하고 self-supervised 학습을 진행하는데 이를 self-supervied pre-training(SSP)로 정의
+  - 이 프로세스는 불균형한 데이터에서 Label 상관없이, 더 나은 초기화 및 데이터의 특징을 학습하는 것을 목표로 함
+2. SSP를 수행한 후에는 기존과 같은 방법으로 학습 진행
+  - SSP는 기존 방법과 연관성이 없으므로, 데이터가 불균형한 기존의 모든 알고리즘에 적용 가능
+
+### Experiments
+
+- 추가적인 데이터는 사용하지 않음
+- Long-tailed CIFAR-10/100, ImageNet-LT, iNaturalist 데이터셋 사용
+- Self-supervied 학습에는 classic Rotation prediction, MoCo 방법 사용 (추가적인 Appendix에서는 4개의 서로 다른 Self-suprevied 알고리즘으로 테스트)
+- 데이터의 불균형도와 학습 알고리즘을 변경하며 실험
+
+![experiment_result_04](images/data_imbalance_06.png)
+
+- Self-supervied의 효과를 확인하기위해 t-SNE를 통해 살펴보면
+
+![experiment_result_05](images/data_imbalance_07.png)
+
+- 일반적인 학습 결과는 Head 클래스의 Decision boundary가 큰 부분을 차지하고 있고, minor 클래스들과의 boundary가 명확하게 구분되지 않는 것을 볼 수있음 -> 일반화되지 않음
+- SSP를 적용하면 Major와 Minor 클래스들간의 공간을 확보(데이터 공간의 구조를 학습)하여 클래스간의 decision boundary가 명확해지는 것을 볼 수 있음
+
+---
+
+## Summary
+
+- Semi-supervised & Self-supervised 관점에서 불균형한 학습 데이터의 문제점을 해결할 수 있음을 확인
+- 직관적인 분석을 통해 검증하였고, 일반적인 프레임워크들을 사용하여 다른 Task에 적용하기 쉬움
