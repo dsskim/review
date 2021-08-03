@@ -41,6 +41,9 @@
 ## Python
 - Python Can Be Faster Than C++ [[Review]](https://github.com/dsskim/review/blob/master/Article/Python/numba.md)
 
+- 10 Advanced Python Concepts To Level Up Your Python Skills[[Review]](https://github.com/dsskim/review/blob/master/Article/Python/02_python_skills.md)
 
 ## ML
 - Struggling with data imbalance? Semi-supervised & Self-supervised learning help! [[Review]](https://github.com/dsskim/review/blob/master/Article/ML/data_imbalance.md)
+
+- SimCLR [[Review]](https://github.com/dsskim/review/blob/master/Article/ML/simclr.md)
