@@ -1,7 +1,7 @@
 # EfficientDet: Scalable and Efficient Object Detection
 ---
 ## Abstract
-- Model의 효울성은 computer vision분야에서 중요성이 증가되고 있음
+- Model의 효성은 computer vision분야에서 중요성이 증가되고 있음
 - Efficiency를 높이기 위한 Key-Optimization 방법 제안
   - weighted bi-directional feature pyramid network(BiFPN)
   - compound scaling 방법
